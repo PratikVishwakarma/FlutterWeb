@@ -20,7 +20,7 @@ class ProductCreatePage extends StatelessWidget {
                   color: Colors.transparent,
                 ),
                 child: Center(
-                    child: Constant().text16("This is model here.")),
+                    child: Constant().text16("Hello users. This is model here.")),
               );
             });
       },
