@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../constant.dart';
 
@@ -14,14 +15,27 @@ class Products extends StatelessWidget {
 
   Widget _buildProductList() {
     //    check if have item in list then render the item else print the message
-    return products.length > 0
-        ? ListView.builder(
-            itemBuilder: buildProductItem,
-            itemCount: products.length,
-          )
-        : Center(
-            child: Constant().text16("No product found, please add some."),
-          );
+    if (kIsWeb) {
+      return products.length > 0
+          ? GridView.builder(
+              gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3),
+              itemBuilder: buildProductItem,
+              itemCount: products.length,
+            )
+          : Center(
+              child: Constant().text16("No product found, please add some."),
+            );
+    } else {
+      return products.length > 0
+          ? ListView.builder(
+              itemBuilder: buildProductItem,
+              itemCount: products.length,
+            )
+          : Center(
+              child: Constant().text16("No product found, please add some."),
+            );
+    }
   }
 
   Widget buildProductItem(BuildContext context, int index) {

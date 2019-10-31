@@ -9,7 +9,7 @@ class ProductsAdminPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         drawer: Drawer(
           child: Column(
@@ -37,14 +37,12 @@ class ProductsAdminPage extends StatelessWidget {
           bottom: TabBar(tabs: <Widget>[
             Tab(icon: Icon(Icons.create), text: "Create product"),
             Tab(icon: Icon(Icons.list), text: "My products"),
-            Tab(icon: Icon(Icons.build), text: "Products Edit")
           ]),
         ),
         body: TabBarView(
           children: <Widget>[
             ProductCreatePage(),
-            ProductListPage(),
-            ProductCreatePage()
+            ProductListPage()
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../constant.dart';
 
@@ -21,20 +22,18 @@ class AuthPage extends StatelessWidget {
   }
 
   Widget returnButton() {
-    return Text("Login");
-//    try {
-//      if (Platform.isIOS) return Text("Login IOS");
-//      if (Platform.isAndroid)
-//        return Text("Login Android");
-//
-////      if (html.isWindows) {
-////        return Text("Login Web");
-////      }
-//      else
-//        return Text("Login");
-//    } on Exception catch (e) {
-//      print(e);
-//      return Text("Login Web");
-//    }
+    try {
+      if(kIsWeb) return Text("Login Web");
+      else {
+        if (Platform.isIOS) return Text("Login IOS");
+        if (Platform.isAndroid)
+          return Text("Login Android");
+        else
+          return Text("Login");
+      }
+    } on Exception catch (e) {
+      print(e);
+      return Text("Login Web");
+    }
   }
 }
