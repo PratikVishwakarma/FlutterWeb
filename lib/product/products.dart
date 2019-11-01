@@ -10,16 +10,18 @@ class Products extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildProductList();
+    return _buildProductList(context);
   }
 
-  Widget _buildProductList() {
+  Widget _buildProductList(BuildContext context) {
     //    check if have item in list then render the item else print the message
     if (kIsWeb) {
+      var width = MediaQuery.of(context).size.width / 300;
+
       return products.length > 0
           ? GridView.builder(
               gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3),
+                  crossAxisCount: width.toInt()),
               itemBuilder: buildProductItem,
               itemCount: products.length,
             )
