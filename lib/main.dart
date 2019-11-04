@@ -21,7 +21,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final List<Map<String, String>> _products = [];
+  final List<Map<String, dynamic>> _products = [];
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +34,14 @@ class _MyAppState extends State<MyApp> {
           primarySwatch: Colors.deepOrange,
           accentColor: Colors.deepPurple),
       routes: {
-        Constant.NAVIGATION_ADMIN: (context) => ProductsAdminPage(),
-        Constant.NAVIGATION_PRODUCTS: (context) =>
-            ProductsPage(_products, _addProduct, _actionOnItem),
+        Constant.NAVIGATION_ADMIN: (context) => ProductsAdminPage(_addProduct),
+        Constant.NAVIGATION_PRODUCTS: (context) => ProductsPage(_products, _actionOnItem),
       },
       onGenerateRoute: (RouteSettings setting) {
         var pathElements = setting.name.split("/");
-        print("0");
         if (pathElements[0] != "") return null;
-        print("1");
         if (pathElements[1] == Constant.NAVIGATION_PRODUCTS_DETAILS) {
           var index = int.parse(pathElements[2]);
-          print("product is : " + index.toString());
           return MaterialPageRoute<bool>(
               builder: (context) => ProductDetail(_products[index]));
         }
@@ -54,13 +50,13 @@ class _MyAppState extends State<MyApp> {
       onUnknownRoute: (RouteSettings settings) {
         return MaterialPageRoute<bool>(
             builder: (context) =>
-                ProductsPage(_products, _addProduct, _deleteProduct));
+                ProductsPage(_products, _actionOnItem));
       },
       home: AuthPage(),
     );
   }
 
-  void _addProduct(Map<String, String> product) {
+  void _addProduct(Map<String, dynamic> product) {
 //    we can also add product to list first and then call setState
 //    _products.add(product);
     setState(() {

@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/products_page.dart';
+
 import '../constant.dart';
 import 'product_create.dart';
 import 'product_list.dart';
 
 class ProductsAdminPage extends StatelessWidget {
+  final Function addProduct;
+  ProductsAdminPage(this.addProduct);
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -41,7 +43,7 @@ class ProductsAdminPage extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            ProductCreatePage(),
+            ProductCreatePage(addProduct),
             ProductListPage()
           ],
         ),

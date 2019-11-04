@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../constant.dart';
 
 class Products extends StatelessWidget {
-  final List<Map<String, String>> products;
+  final List<Map<String, dynamic>> products;
   final Function actionOnItem;
 
   Products(this.products, this.actionOnItem);
@@ -60,11 +60,12 @@ class Products extends StatelessWidget {
                                 "/" +
                                 index.toString())
                         .then((bool value) {
-                      if (value != null) actionOnItem("image", index);
+                      if (value != null) actionOnItem("Remove", index);
                     });
                   },
                   child: Image.asset("assets/food.jpg")),
               Constant().text16(products[index]["title"]),
+              Constant().text16(products[index]["description"]),
               ButtonBar(
                 alignment: MainAxisAlignment.center,
                 children: <Widget>[

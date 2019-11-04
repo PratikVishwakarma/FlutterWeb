@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import '../constant.dart';
 
 class ProductCreatePage extends StatefulWidget {
+  final Function addProduct;
+
+  ProductCreatePage(this.addProduct);
+
   @override
   State<StatefulWidget> createState() {
     return _ProductCreatePage();
@@ -9,39 +12,59 @@ class ProductCreatePage extends StatefulWidget {
 }
 
 class _ProductCreatePage extends State<ProductCreatePage> {
-  String titleValue = "";
+  String _titleValue;
+  String _descriptionValue;
+  double _priceValue;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Constant().text16("Title"),
-        TextField(
-          onChanged: (String value) {
-//            setState(() {
-//              titleValue = value;
-//            });
-          },
-        ),
-        Constant().text16("Description"),
-        TextField(
-          keyboardType: TextInputType.multiline,
-          onChanged: (String value) {
-//            setState(() {
-//              titleValue = value;
-//            });
-          },
-        ),
-        Constant().text16("Price"),
-        TextField(
-          keyboardType: TextInputType.number,
-          onChanged: (String value) {
-//            setState(() {
-//              titleValue = value;
-//            });
-          },
-        ),
-      ],
+    return Container(
+      margin: EdgeInsets.all(10.0),
+      child: ListView(
+        children: <Widget>[
+          TextField(
+            decoration: InputDecoration(labelText: "Title"),
+            onChanged: (String value) {
+              setState(() {
+                _titleValue = value;
+              });
+            },
+          ),
+          TextField(
+            decoration: InputDecoration(labelText: "Description"),
+            maxLines: 4,
+            keyboardType: TextInputType.multiline,
+            onChanged: (String value) {
+              setState(() {
+                _descriptionValue = value;
+              });
+            },
+          ),
+          TextField(
+            decoration: InputDecoration(labelText: "Price"),
+            keyboardType: TextInputType.number,
+            onChanged: (String value) {
+              setState(() {
+                _priceValue = double.parse(value);
+              });
+            },
+          ),
+          RaisedButton(
+            child: Text("Save"),
+            color: Theme.of(context).accentColor,
+            textColor: Colors.white,
+            onPressed: () {
+              widget.addProduct({
+                'title': _titleValue,
+                'description': _descriptionValue,
+                'price': _priceValue,
+                'image': 'assets/food.jpg'
+              });
+//              Navigator.pop(context);
+            },
+          )
+        ],
+      ),
     );
 
 //      Center(
@@ -67,7 +90,6 @@ class _ProductCreatePage extends State<ProductCreatePage> {
 //    ));
   }
 
-  @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
     return null;

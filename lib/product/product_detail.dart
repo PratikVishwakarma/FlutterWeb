@@ -24,6 +24,7 @@ class ProductDetail extends StatelessWidget {
             children: <Widget>[
               Image.asset(product["image"]),
               Constant().text16(product["title"]),
+              Constant().text16(product["description"]),
               RaisedButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text("Go Back"),
